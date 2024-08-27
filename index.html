@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo List</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f0f4f8;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .inner-container {
+            padding: 40px 50px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 300px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #2c3e50;
+        }
+
+        #task-inp {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        #btn {
+            padding: 12px 20px;
+            border: none;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        #btn:hover {
+            background-color: #2980b9;
+        }
+
+        .result {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        #task-div {
+            background-color: #ecf0f1;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #task-content {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        #del-btn {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        #del-btn:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>ToDo List</h2>
+        <div class="inner-container">
+            <input type="text" placeholder="Task name goes here..." name="task" id="task-inp">
+            <button id="btn">Add Task</button>
+        </div>
+        <div class="result"></div>
+    </div>
+
+    <script>
+        let taskInput = document.getElementById('task-inp');
+        let button = document.querySelector('#btn');
+        let result = document.querySelector('.result');
+
+        button.addEventListener('click', () => {
+
+            if (taskInput.value.length == 0) {
+                alert('Please enter a task!!!');
+            } else {
+
+                let task = document.createElement('div');
+                task.id = 'task-div';
+
+                let taskContent = document.createElement('p');
+                taskContent.id = 'task-content';
+                taskContent.innerText = taskInput.value;
+                task.appendChild(taskContent);
+
+                let deleteBtn = document.createElement('button');
+                deleteBtn.id = 'del-btn';
+                deleteBtn.innerText = 'Delete';
+                task.appendChild(deleteBtn);
+
+                result.appendChild(task);
+
+                deleteBtn.addEventListener('click', () => {
+                    task.remove();
+                });
+
+                taskInput.value = '';
+            }
+        });
+    </script>
+
+</body>
+
+</html>
